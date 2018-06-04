@@ -1,7 +1,7 @@
 package com.github.fasttext.utils
 
 object functions {
-  def computeSubwords(word : String, minn : Int, maxn : Int) = {
+  def computeSubwords(word : String, minn : Int, maxn : Int) : IndexedSeq[String] = {
 
     val iter = 0 until word.size
     val sizes = minn to maxn
