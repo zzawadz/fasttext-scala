@@ -16,6 +16,7 @@ class MatrixTests extends FlatSpec {
     val dict   = new Dictionary(args, reader)
 
     val mat = new Matrix(reader)
+    val matOut = new Matrix(reader)
 
     assert(mat.quant_ == 0)
     assert(mat.m_ == 3032577)
@@ -26,6 +27,10 @@ class MatrixTests extends FlatSpec {
     assert(mat.data(0)(0) === -0.00276645f)
     assert(mat.data(1)(0) === 0.053267f)
     assert(mat.data.last.last === 0.24957f)
+
+    assert(matOut.data(0)(0) === 0.0211942f)
+    assert(matOut.data(1)(0) === -0.0282539f)
+    assert(matOut.data.last.last === -0.0868598f)
   }
 
 }
