@@ -68,6 +68,15 @@ class BinaryReader(val filePath : String) {
     (extractNextString(), extractNextInt(), extractNextInt())
   }
 
+  def extractNextNFloats(n : Int) : Array[Float] = {
+
+    (0 until n).map(x => {
+      inputStream.read(fourBytes)
+      ByteBuffer.wrap(fourBytes).order(byteOrder).getFloat
+    }).toArray
+
+  }
+
 
 }
 

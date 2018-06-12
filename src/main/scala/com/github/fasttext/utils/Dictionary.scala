@@ -11,5 +11,6 @@ class Dictionary(val args : Args, fastTextParser : BinaryReader) {
   val pruneidxSize = fastTextParser.extractNextLong()
 
   val words = (0 until size).map(x => fastTextParser.extractNextDictWord())
+  fastTextParser.extractNextBool()
 
 }
