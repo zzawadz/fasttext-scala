@@ -6,9 +6,9 @@ before_install:
   - cd data
   - wget https://github.com/facebookresearch/fastText/archive/master.zip
   - unzip master.zip
-  - cd fastText-master && make
-  - ./fasttext skipgram -input ../text.txt -thread 1 -output ../loremModel -dim 10 -minn 3 -maxn 6
-  - cd ../..
+  - cd fastText-master && make && cd ..
+  - ./fastText-master/fasttext skipgram -input text.txt -thread 1 -output loremModel -dim 10 -minn 3 -maxn 6
+  - cd ..
 
 script:
   - sbt -jvm-opts travis/jvmopts.compile compile
