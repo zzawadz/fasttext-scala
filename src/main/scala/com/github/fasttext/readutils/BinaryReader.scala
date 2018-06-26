@@ -23,7 +23,7 @@ class BinaryReader(val filePath : String) {
   val FASTTEXT_FILEFORMAT_MAGIC_INT32 : Int = 793712314
   val FASTTEXT_VERSION : Int = extractNextInt()
 
-  val byteOrder =  if(magicNumberLittleEndian == FASTTEXT_FILEFORMAT_MAGIC_INT32) ByteOrder.LITTLE_ENDIAN
+  val byteOrder : ByteOrder =  if(magicNumberLittleEndian == FASTTEXT_FILEFORMAT_MAGIC_INT32) ByteOrder.LITTLE_ENDIAN
   else if(magicNumberBigEndian == FASTTEXT_FILEFORMAT_MAGIC_INT32) ByteOrder.BIG_ENDIAN
   else throw new Exception
 

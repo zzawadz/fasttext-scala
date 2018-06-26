@@ -8,13 +8,14 @@ class Dictionary(val args : Args, fastTextParser : BinaryReader) {
   val MAX_VOCAB_SIZE : Int = 30000000
 
 
-  val size = fastTextParser.extractNextInt()
-  val nwords = fastTextParser.extractNextInt
-  val nlabels = fastTextParser.extractNextInt
-  val ntokens = fastTextParser.extractNextLong()
-  val pruneidxSize = fastTextParser.extractNextLong()
+  val size : Int = fastTextParser.extractNextInt()
+  val nwords : Int = fastTextParser.extractNextInt()
+  val nlabels : Int = fastTextParser.extractNextInt()
+  val ntokens : Long = fastTextParser.extractNextLong()
+  val pruneidxSize : Long = fastTextParser.extractNextLong()
 
-  val words = (0 until size).map(x => fastTextParser.extractNextDictWord())
+  val words : Array[(String, Int, Int)] = (0 until size).
+                map(x => fastTextParser.extractNextDictWord()).toArray
   fastTextParser.extractNextBool()
 
 
@@ -50,8 +51,8 @@ class Dictionary(val args : Args, fastTextParser : BinaryReader) {
   }
 
   def getId(w : String) : Int = {
-    val h : Int = find(w);
-    return word2int_(h);
+    val h : Int = find(w)
+    word2int_(h)
   }
 
 }
