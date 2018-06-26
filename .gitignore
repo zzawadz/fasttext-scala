@@ -3,5 +3,6 @@
 /bin/
 project/target
 target
-data
+data/wiki.pl
 .idea
+.Rproj.user
