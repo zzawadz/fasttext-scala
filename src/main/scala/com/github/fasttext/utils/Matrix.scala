@@ -1,13 +1,19 @@
 package com.github.fasttext.utils
 
 import com.github.fasttext.readutils.BinaryReader
+import breeze.linalg.DenseVector
 
 class Matrix(fastTextParser : BinaryReader) {
 
-  val quant_ = fastTextParser.extractNextBool()
+  val quant_ : Boolean = fastTextParser.extractNextBool()
   val m_ : Long = fastTextParser.extractNextLong()
   val n_ : Int = fastTextParser.extractNextLong().toInt
 
-  val data : Array[Array[Float]] = (0 until m_.toInt).map(x => fastTextParser.extractNextNFloats(n_)).toArray
+  val data : Array[DenseVector[Float]] = (0 until m_.toInt)
+          .map(x => DenseVector(fastTextParser.extractNextNFloats(n_)))
+          .toArray
 
+  def getRow(i : Int): DenseVector[Float] = {
+    data(i)
+  }
 }

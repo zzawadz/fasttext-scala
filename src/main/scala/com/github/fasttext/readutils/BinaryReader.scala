@@ -27,8 +27,8 @@ class BinaryReader(val filePath : String) {
   else if(magicNumberBigEndian == FASTTEXT_FILEFORMAT_MAGIC_INT32) ByteOrder.BIG_ENDIAN
   else throw new Exception
 
-  def extractNextBool() : Int = {
-    inputStream.read()
+  def extractNextBool() : Boolean = {
+    inputStream.read() != 0
   }
 
   def extractNextInt() : Int = {
