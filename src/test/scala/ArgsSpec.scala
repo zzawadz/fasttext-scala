@@ -7,11 +7,11 @@ class ArgsSpec extends FlatSpec {
 
   "Parameters" should "match predefined values" in {
 
-    val filePath = "data/wiki.pl/wiki.pl.bin"
+    val filePath = "data/loremipsum/loremModel.bin"
     val reader = new BinaryReader(filePath)
     val args   = new Args(reader)
 
-    assert(args.dim == 300)
+    assert(args.dim == 10)
     assert(args.ws == 5)
     assert(args.epoch == 5)
     assert(args.minCount == 5)
