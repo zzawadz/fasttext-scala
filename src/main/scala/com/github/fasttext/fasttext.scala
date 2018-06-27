@@ -1,6 +1,7 @@
-package com.github.fasttext.readutils
+package com.github.fasttext
 
 import breeze.linalg.DenseVector
+import com.github.fasttext.readutils.BinaryReader
 import com.github.fasttext.utils.{Args, Dictionary, Matrix}
 
 class fasttext(val filePath : String) {
