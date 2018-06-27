@@ -27,16 +27,22 @@ class Dictionary(val args : Args, fastTextParser : BinaryReader) {
 
   val BOW : String = "<"
   val EOW : String = ">"
+  val EOS : String = "</s>"
 
   def getSubwords(word : String): Array[Int] = {
 
-    val i = getId(word)
+    if(word == EOS) {
+      Array[Int](0)
+    } else {
+      val i = getId(word)
 
-    val prefix = if(i >= 0) Array(i) else Array()
+      val prefix = if(i >= 0) Array(i) else Array()
 
-    val subwords = functions.computeSubwords(BOW + word + EOW, args.minn, args.maxn)
-    val hashArray = subwords.map(x => (nwords + functions.hash(x) % args.bucket).toInt).toArray
-    prefix ++ hashArray
+      val subwords = functions.computeSubwords(BOW + word + EOW, args.minn, args.maxn)
+      val hashArray = subwords.map(x => (nwords + functions.hash(x) % args.bucket).toInt).toArray
+      prefix ++ hashArray
+    }
+
   }
 
 

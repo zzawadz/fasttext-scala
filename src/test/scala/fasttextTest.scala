@@ -13,14 +13,12 @@ class fasttextTest extends FlatSpec {
   val fastModel = new fasttext(filePath)
   val fastVec = new fastvec(filePathVec)
 
-  "Word vectors" should "match predefined values () sample" in {
+  def checkWord(word : String) : Boolean = {
+    (fastModel.getWordVector(word) - fastVec.getWordVector(word))
+      .toArray.map(_.abs).max < 0.00005
+  }
 
-    fastVec.getWordVector("vestibulum")
-
-    def checkWord(word : String) : Boolean = {
-      (fastModel.getWordVector(word) - fastVec.getWordVector(word))
-        .toArray.map(_.abs).max < 0.00005
-    }
+  "Word vectors" should "match predefined values - sample" in {
 
     assert(checkWord("vitae"))
     assert(checkWord("metus"))
@@ -29,5 +27,14 @@ class fasttextTest extends FlatSpec {
     assert(checkWord("curae;"))
 
   }
+
+  "Word vector '</s>' (EOS)" should "match predefined values" in {
+    assert(checkWord("</s>"))
+  }
+
+  "All word vectors" should "match predefined values" in {
+    assert(fastVec.data.keys.forall(x => checkWord(x)))
+  }
+
 
 }
