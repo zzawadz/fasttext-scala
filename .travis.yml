@@ -11,5 +11,7 @@ before_install:
   - cd ..
 
 script:
-  - sbt -jvm-opts travis/jvmopts.compile compile
-  
+  - sbt clean coverage test coverageReport
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
