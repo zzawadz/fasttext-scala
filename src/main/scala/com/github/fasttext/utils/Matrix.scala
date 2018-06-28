@@ -9,8 +9,10 @@ class Matrix(fastTextParser : BinaryReader) {
   val m_ : Long = fastTextParser.extractNextLong()
   val n_ : Int = fastTextParser.extractNextLong().toInt
 
+  fastTextParser.setFloatArraySize(n_)
+
   val data : Array[DenseVector[Float]] = (0 until m_.toInt)
-          .map(x => DenseVector(fastTextParser.extractNextNFloats(n_)))
+          .map(x => fastTextParser.extractNextNFloats())
           .toArray
 
   def getRow(i : Int): DenseVector[Float] = {

@@ -6,6 +6,7 @@ import java.nio.ByteOrder
 import scala.collection.mutable.ArrayBuffer
 import java.nio.charset.StandardCharsets
 import java.io.{BufferedInputStream, FileInputStream, InputStream}
+import breeze.linalg.DenseVector
 
 class BinaryReader(val filePath : String) {
 
@@ -68,13 +69,21 @@ class BinaryReader(val filePath : String) {
     (extractNextString(), extractNextInt(), extractNextInt())
   }
 
-  def extractNextNFloats(n : Int) : Array[Float] = {
+  ///// Read floats in chunks
+  var arrayFloatBuffer : Array[Byte] = Array[Byte](1)
+  var arrayFloatSize : Int = 0;
 
-    (0 until n).map(x => {
-      inputStream.read(fourBytes)
-      ByteBuffer.wrap(fourBytes).order(byteOrder).getFloat
-    }).toArray
+  def setFloatArraySize(n : Int) = {
+    arrayFloatBuffer =  Array.fill(n * 4){1.toByte}
+    arrayFloatSize = n
+  }
 
+  def extractNextNFloats() : DenseVector[Float] = {
+
+    inputStream.read(arrayFloatBuffer)
+    val result : Array[Float] = new Array(arrayFloatSize)
+    ByteBuffer.wrap(arrayFloatBuffer).order(byteOrder).asFloatBuffer.get(result)
+    DenseVector[Float](result)
   }
 
 
